@@ -7,25 +7,27 @@ connection = sqlite3.connect(DB)
 sql = connection.cursor()
 
 
-
 sql.execute(
     """
     CREATE TABLE IF NOT EXISTS users
     (id INTEGER PRIMARY KEY AUTOINCREMENT,
     telegram_id INTEGER,
     first_name TEXT,
-    user_name TEXT,
+    phone_number TEXT,
     reg_date DATETIME);
     """
 )
 
 
-def register_user(telegram_id, first_name, user_name,date):
+def register_user(telegram_id, first_name, phone_button):
     connection = sqlite3.connect(DB)
     sql = connection.cursor()
 
-    sql.execute(" INSERT INTO users (telegram_id, first_name, user_name, reg_date) VALUES (?,?,?,?); ",
-                (telegram_id, first_name, user_name, date))
+    sql.execute(" INSERT INTO users (telegram_id, first_name, phone_number, reg_date) VALUES (?,?,?,?); ",
+                (telegram_id, first_name, phone_button, datetime.now()))
+
+    connection.commit()
+    connection.close()
 
 
 sql.execute(

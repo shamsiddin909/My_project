@@ -15,12 +15,10 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def start(message:types.Message):
     await message.answer(f"Salom - {message.from_user.first_name}\nBotimizga hush kelibsiz.\nSiz bu bot orqali ozingizga kerak bolgan Telefonlarni topishingiz mumkin", reply_markup=main)
-    user_name = message.from_user.username
-    first_name = message.from_user.first_name
+    first_name = message.from_user.username
     telegram_id = message.from_user.id
-    date = datetime.now
-    database.register_user(telegram_id, first_name, user_name,date)
-
+    phone_number = +987654345678
+    database.register_user(telegram_id, first_name, phone_number)
 
 @dp.message_handler(commands=['admin'])
 async def admin_panel(message:types.Message):
